@@ -5,7 +5,7 @@ The method is described by A.P. Willard and D. Chandler in [_Instantaneous Liqui
 
 # usage
 
-python ./willardchandler.py -s <top> -t <traj> -o <output> -b <begin> -e <every> -m <molecules> -l <layers>
+python ./willardchandler.py -s TOPOLOGY -t TRAJECTORY -o OUTPUT PICKLE FILE -b FIRST FRAME -e FRAME INTERVAL -m MOLECULES -l LAYERS
 
 for example
 
