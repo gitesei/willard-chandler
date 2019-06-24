@@ -97,6 +97,8 @@ def calc_profiles(frame,surface,params,label,sign,layers):
         _, ind = tree.query(pos, k=1)
         dist = (tree.data[ind,2] - pos[:,2])*sign
         if type(value[label]) == dict:
+            hist, _ = np.histogram(dist,bins=edges,density=False)
+            value[label]['conc'] += hist * toM
             if value[label]['theta'].ndim > 1:
                 cosine(frame,dist,atom,normals,ind,value[label],sign,edges,toM,layers)
             else:
@@ -115,8 +117,6 @@ def calc_profiles(frame,surface,params,label,sign,layers):
             value[label] += hist * toM
 
 def cosine(frame,dist,atom,normals,ind,dictionary,sign,edges,toM,layers):
-    hist, _ = np.histogram(dist,bins=edges,density=False)
-    dictionary['conc'] += hist * toM
     selection_string = 'name '+dictionary['pair'][0]+' or name '+dictionary['pair'][1]
     pair = np.array(frame.top.select(selection_string)).reshape(-1,2)
     vec = md.compute_displacements(frame,pair).reshape(-1,3)
@@ -156,6 +156,7 @@ def dangling(frame,dictionary,sign,dist,distOSN,idx,idxOSN,normals):
     beta2 = angle_h2ox<=50
     angles_ho = np.append(angle_h1o[np.sum(beta1*Rc,axis=1)==0],angle_h2o[np.sum(beta2*Rc,axis=1)==0])
     dictionary['ndang'] = np.append(dictionary['ndang'],angles_ho.size)
+    dictionary['all'] = np.append(dictionary['all'],idx.size)
     hist, _ = np.histogram(angles_ho,bins=np.arange(0,181,2),density=False)
     dictionary['theta'] += hist
 

@@ -92,6 +92,8 @@ def calc_profiles(frame,params,label,sign,layers):
         z_pos = frame.atom_slice(frame.top.select('name '+atom)).xyz[0,:,2] - z_com
         dist = (z_gds - z_pos)*sign
         if type(value[label]) == dict:
+            hist, _ = np.histogram(dist,bins=edges,density=False)    
+            value[label]['conc'] += hist * toM
             if value[label]['theta'].ndim > 1:
                 profile_cosine(frame,dist,atom,value[label],sign,edges,toM,layers)
             else:
@@ -108,8 +110,6 @@ def calc_profiles(frame,params,label,sign,layers):
             value[label] += hist * toM    
 
 def profile_cosine(frame,dist,atom,dictionary,sign,edges,toM,layers):
-    hist, _ = np.histogram(dist,bins=edges,density=False)    
-    dictionary['conc'] += hist * toM
     selection_string = 'name '+dictionary['pair'][0]+' or name '+dictionary['pair'][1]
     pair = np.array(frame.top.select(selection_string)).reshape(-1,2)
     vec = md.compute_displacements(frame,pair).reshape(-1,3)
