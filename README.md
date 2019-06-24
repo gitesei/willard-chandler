@@ -23,6 +23,5 @@ python ./willardchandler.py -s npt.gro -t npt.xtc -o out.p -b 1000 -e 10 -m 'H1 
 
 # References
 
-1. A. P. Willard and D. Chandler, “Instantaneous liquid interfaces”, The Journal of Physical Chemistry B 114, 1954–1958 (2010).
-
-2. F. Tang, T. Ohto, T. Hasegawa, W. J. Xie, L. Xu, M. Bonn, and Y. Nagata, “Definition of free o–h groups of water at the air–water interface”, Journal of Chemical Theory and Computation 14, 357–364 (2017).
+1. A. P. Willard and D. Chandler, “Instantaneous liquid interfaces”, The Journal of Physical Chemistry B 114, 1954–1958 (2010)
+2. F. Tang, T. Ohto, T. Hasegawa, W. J. Xie, L. Xu, M. Bonn, and Y. Nagata, “Definition of free o–h groups of water at the air–water interface”, Journal of Chemical Theory and Computation 14, 357–364 (2017)
