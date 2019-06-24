@@ -100,7 +100,7 @@ def calc_profiles(frame,surface,params,label,sign,layers):
             hist, _ = np.histogram(dist,bins=edges,density=False)
             value[label]['conc'] += hist * toM
             if value[label]['theta'].ndim > 1:
-                cosine(frame,dist,atom,normals,ind,value[label],sign,edges,toM,layers)
+                cosine(frame,dist,atom,normals[ind,:],value[label],sign,edges,toM,layers)
             else:
                 selOSN = frame.top.select('name O or name S1 or name N3')
                 posOSN = frame.atom_slice(selOSN).xyz[0]
@@ -116,11 +116,11 @@ def calc_profiles(frame,surface,params,label,sign,layers):
             hist, _ = np.histogram(dist,bins=edges,density=False)
             value[label] += hist * toM
 
-def cosine(frame,dist,atom,normals,ind,dictionary,sign,edges,toM,layers):
+def cosine(frame,dist,atom,normals,dictionary,sign,edges,toM,layers):
     selection_string = 'name '+dictionary['pair'][0]+' or name '+dictionary['pair'][1]
     pair = np.array(frame.top.select(selection_string)).reshape(-1,2)
     vec = md.compute_displacements(frame,pair).reshape(-1,3)
-    cosine = np.einsum('ij,ij->i',vec,normals[ind,:]) / np.linalg.norm(vec,axis=1)
+    cosine = np.einsum('ij,ij->i',vec,normals) / np.linalg.norm(vec,axis=1)
     if atom=='C2':
         cosine = -cosine
     hist, _ = np.histogram(dist,bins=edges,weights=cosine,density=False)
