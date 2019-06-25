@@ -1,4 +1,4 @@
-# Willard-Chandler Instantaneus Interface Calculator
+# Willard-Chandler Instantaneous Interface Calculator
 Python-based tool to calculate instantaneous interfaces and concentration/orientation profiles from molecular simulation trajectories in slab geometry.
 
 The method is described by A.P. Willard and D. Chandler in [_Instantaneous Liquid Interfaces_](https://pubs.acs.org/doi/10.1021/jp909219k). The algorithm is an adaptation of parts of the [`pytim` code](https://github.com/Marcello-Sega/pytim) by M. Sega.
