@@ -1,7 +1,7 @@
 # Willard-Chandler Instantaneous Interface Calculator
 Python-based tool to calculate instantaneous interfaces and concentration/orientation profiles from molecular simulation trajectories in slab geometry.
 
-The method is described by A.P. Willard and D. Chandler in [_Instantaneous Liquid Interfaces_](https://pubs.acs.org/doi/10.1021/jp909219k). The algorithm is an adaptation of parts of the [`pytim` code](https://github.com/Marcello-Sega/pytim) by M. Sega.
+The method is described by A.P. Willard and D. Chandler in [_Instantaneous Liquid Interfaces_](https://pubs.acs.org/doi/10.1021/jp909219k) [1]. The algorithm is partly an adaptation of the willard-chandler module of the [`pytim` code](https://github.com/Marcello-Sega/pytim) by M. Sega with the addition of a routine to calculate the orientational distribution of free O-H groups at the interface [2].
 
 # Usage
 
@@ -24,4 +24,4 @@ python ./willardchandler.py -s npt.gro -t npt.xtc -o out.p -b 1000 -e 10 -m 'H1 
 # References
 
 1. A. P. Willard and D. Chandler, “Instantaneous liquid interfaces”, The Journal of Physical Chemistry B 114, 1954–1958 (2010)
-2. F. Tang, T. Ohto, T. Hasegawa, W. J. Xie, L. Xu, M. Bonn, and Y. Nagata, “Definition of free o–h groups of water at the air–water interface”, Journal of Chemical Theory and Computation 14, 357–364 (2017)
+2. F. Tang, T. Ohto, T. Hasegawa, W. J. Xie, L. Xu, M. Bonn, and Y. Nagata, “Definition of free O-H groups of water at the air–water interface”, Journal of Chemical Theory and Computation 14, 357–364 (2017)
