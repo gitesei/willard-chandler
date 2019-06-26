@@ -1,7 +1,7 @@
 # Willard-Chandler Instantaneous Interface Calculator
 Python-based tool to calculate instantaneous interfaces and concentration/orientation profiles from molecular simulation trajectories in slab geometry.
 
-The method is described by A.P. Willard and D. Chandler in [_Instantaneous Liquid Interfaces_](https://pubs.acs.org/doi/10.1021/jp909219k) [1]. The implementation uses the Lewiner marching cubes algorithm [2] and is partly an adaptation of the willard-chandler module of the [`pytim` code](https://github.com/Marcello-Sega/pytim) by M. Sega with the addition of a routine to calculate the orientational distribution of free O-H groups at the interface [3].
+The method is described by A.P. Willard and D. Chandler in [_Instantaneous Liquid Interfaces_](https://pubs.acs.org/doi/10.1021/jp909219k) [1]. The tool uses the Lewiner marching cubes algorithm [2] and is partly an adaptation of the willard-chandler module of the [`pytim` code](https://github.com/Marcello-Sega/pytim) by M. Sega with the addition of a routine to calculate the orientational distribution of free O-H groups at the interface [3].
 
 # Usage
 
