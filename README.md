@@ -9,6 +9,8 @@ The method is described by A.P. Willard and D. Chandler in [_Instantaneous Liqui
 
 # Usage
 
+`example.ipynb` shows how to use the code to analyze and visualize the interfaces of a NaSCN aqueous solution in slab geometry.
+
 To calculate concentration profiles, orientational distributions of linear ions and free OH groups w.r.t. the rough instantaneous interface:
 
 python ./willardchandler.py -s TOPOLOGY -t TRAJECTORY -o OUTPUT PICKLE FILE -b FIRST FRAME -e FRAME INTERVAL -m MOLECULES -l LAYERS
