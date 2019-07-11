@@ -9,7 +9,9 @@ The method is described by A.P. Willard and D. Chandler in [_Instantaneous Liqui
 
 # Usage
 
-`example.ipynb` shows how to use the code to analyze and visualize the interfaces of a NaSCN aqueous solution in slab geometry.
+The Jupyter Notebook `example.ipynb` shows how to use the code to analyze and visualize the interfaces of a NaSCN aqueous solution in slab geometry.
+
+### On the command line
 
 To calculate concentration profiles, orientational distributions of linear ions and free OH groups w.r.t. the rough instantaneous interface:
 
