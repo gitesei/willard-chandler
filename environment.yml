@@ -1,0 +1,14 @@
+name: willard-chandler
+channels:
+- conda-forge
+dependencies:
+- ipython
+- notebook
+- matplotlib
+- numpy
+- pandas
+- mdtraj
+- scipy
+- scikit-image
+- pandas
+- nglview
