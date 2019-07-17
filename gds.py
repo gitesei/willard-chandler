@@ -94,8 +94,7 @@ def calc_profiles(frame,params,label,sign,layers):
         if type(value[label]) == dict:
             hist, _ = np.histogram(dist,bins=edges,density=False)    
             value[label]['conc'] += hist * toM
-            if value[label]['theta'].ndim > 1:
-                profile_cosine(frame,dist,atom,value[label],sign,edges,toM,layers)
+            profile_cosine(frame,dist,atom,value[label],sign,edges,toM,layers)
             else:
                 selOSN = frame.top.select('name O or name S1 or name N3')
                 z_pos = frame.atom_slice(selOSN).xyz[0,:,2] - z_com
@@ -118,11 +117,12 @@ def profile_cosine(frame,dist,atom,dictionary,sign,edges,toM,layers):
         cosine = -cosine
     hist, _ = np.histogram(dist,bins=edges,weights=cosine,density=False)
     dictionary['cosine'] += hist * toM
-    angle = np.arccos(np.clip(cosine,-1,1))/np.pi*180
-    for i in range(len(layers)-1):
-        mask = np.logical_and(dist>layers[i],dist<layers[i+1])
-        hist, _ = np.histogram(angle[mask],bins=np.arange(0,181,2),density=False)
-        dictionary['theta'][i] += hist
+    if dictionary['theta'].ndim > 1:
+        angle = np.arccos(np.clip(cosine,-1,1))/np.pi*180
+        for i in range(len(layers)-1):
+            mask = np.logical_and(dist>layers[i],dist<layers[i+1])
+            hist, _ = np.histogram(angle[mask],bins=np.arange(0,181,2),density=False)
+            dictionary['theta'][i] += hist
 
 def dangling(frame,dictionary,sign,dist,distOSN,idx,idxOSN):
     pair_ox = np.asarray(list(itertools.product(idx, idxOSN)))

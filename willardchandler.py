@@ -99,8 +99,7 @@ def calc_profiles(frame,surface,params,label,sign,layers):
         if type(value[label]) == dict:
             hist, _ = np.histogram(dist,bins=edges,density=False)
             value[label]['conc'] += hist * toM
-            if value[label]['theta'].ndim > 1:
-                cosine(frame,dist,atom,normals[ind,:],value[label],sign,edges,toM,layers)
+            profile_cosine(frame,dist,atom,normals[ind,:],value[label],sign,edges,toM,layers)
             else:
                 selOSN = frame.top.select('name O or name S1 or name N3')
                 posOSN = frame.atom_slice(selOSN).xyz[0]
@@ -116,7 +115,7 @@ def calc_profiles(frame,surface,params,label,sign,layers):
             hist, _ = np.histogram(dist,bins=edges,density=False)
             value[label] += hist * toM
 
-def cosine(frame,dist,atom,normals,dictionary,sign,edges,toM,layers):
+def profile_cosine(frame,dist,atom,normals,dictionary,sign,edges,toM,layers):
     selection_string = 'name '+dictionary['pair'][0]+' or name '+dictionary['pair'][1]
     pair = np.array(frame.top.select(selection_string)).reshape(-1,2)
     vec = md.compute_displacements(frame,pair).reshape(-1,3)
@@ -125,11 +124,12 @@ def cosine(frame,dist,atom,normals,dictionary,sign,edges,toM,layers):
         cosine = -cosine
     hist, _ = np.histogram(dist,bins=edges,weights=cosine,density=False)
     dictionary['cosine'] += hist * toM
-    angle = np.arccos(np.clip(cosine,-1,1))/np.pi*180
-    for i in range(len(layers)-1):
-        mask = np.logical_and(dist>layers[i],dist<layers[i+1])
-        hist, _ = np.histogram(angle[mask],bins=np.arange(0,181,2),density=False)
-        dictionary['theta'][i] += hist
+    if dictionary['theta'].ndim > 1:
+        angle = np.arccos(np.clip(cosine,-1,1))/np.pi*180
+        for i in range(len(layers)-1):
+            mask = np.logical_and(dist>layers[i],dist<layers[i+1])
+            hist, _ = np.histogram(angle[mask],bins=np.arange(0,181,2),density=False)
+            dictionary['theta'][i] += hist
 
 def dangling(frame,dictionary,sign,dist,distOSN,idx,idxOSN,normals):
     pair_ox = np.asarray(list(itertools.product(idx, idxOSN)))
