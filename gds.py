@@ -95,7 +95,7 @@ def calc_profiles(frame,params,label,sign,layers):
             hist, _ = np.histogram(dist,bins=edges,density=False)    
             value[label]['conc'] += hist * toM
             profile_cosine(frame,dist,atom,value[label],sign,edges,toM,layers)
-            else:
+            if dictionary['theta'].ndim == 1:
                 selOSN = frame.top.select('name O or name S1 or name N3')
                 z_pos = frame.atom_slice(selOSN).xyz[0,:,2] - z_com
                 distOSN = (z_gds - z_pos)*sign
