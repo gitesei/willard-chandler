@@ -100,7 +100,7 @@ def calc_profiles(frame,surface,params,label,sign,layers):
             hist, _ = np.histogram(dist,bins=edges,density=False)
             value[label]['conc'] += hist * toM
             profile_cosine(frame,dist,atom,normals[ind,:],value[label],sign,edges,toM,layers)
-            if dictionary['theta'].ndim == 1:
+            if value[label]['theta'].ndim == 1:
                 selOSN = frame.top.select('name O or name S1 or name N3')
                 posOSN = frame.atom_slice(selOSN).xyz[0]
                 _, indOSN = tree.query(posOSN, k=1)
